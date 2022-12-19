@@ -85,26 +85,6 @@ export function handleDonated(event: Donated): void {
     campaign.save()
   
   }
-
-  // load the campaign entity
-  // let campaign = Campaign.load(`${event.params.campaignID}`)
-
-  // // initialize temporary array to hold the campaign's donors
-  // let donors = new Array<string>();
-
-  // if(campaign) {
-  //   // add the donor entity to the campaign entity's donors array
-  //   donors.push(donor.id)
-  //   campaign.donors = donors
-
-  //   // update the campaign entity's totalDonated field
-  //   campaign.totalDonated = campaign.totalDonated.plus(event.params.amount)
-
-  //   // save the campaign entity
-  //   campaign.save()
-  
-  // }
-
 }
 
 export function handlePromotionSubmitted(event: PromotionSubmitted): void {
