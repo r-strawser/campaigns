@@ -1,0 +1,34 @@
+type Campaign @entity {
+  id: ID!
+  operatorAddress: String!
+  treasuryAddress: String!
+  campaignName: String!
+  description: String!
+  targetGoal: BigInt!
+  totalDonated: BigInt!
+  isActive: Boolean!
+  timestampCreated: BigInt!
+  promotionPrice: BigInt!
+  minimumDonation: BigInt!
+  platformFeePercentage: BigInt!
+  campaignFeePercentage: BigInt!
+  promotions: [Promotion!]! @derivedFrom(field: "campaign")
+  donors: [Donor!]! @derivedFrom(field: "campaign")
+}
+
+type Promotion @entity {
+  id: ID!
+  campaign: Campaign!
+  promoterAddress: String!
+  amountPaid: BigInt!
+  promotionUrl: String!
+  timestamp: BigInt!
+}
+
+type Donor @entity {
+  id: ID!
+  campaign: Campaign!
+  donorAddress: String!
+  amount: BigInt!
+  timestamp: BigInt!
+}
