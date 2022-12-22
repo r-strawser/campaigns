@@ -1,6 +1,6 @@
 specVersion: 0.0.4
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: Campaigns
@@ -19,7 +19,7 @@ dataSources:
         - PromotionSubmitted
       abis:
         - name: Campaigns
-          file: ./abis/Campaigns.json
+          file: Campaigns\abis\Campaigns.json
       eventHandlers:
         - event: CampaignCreated(uint256,address,address,string,string,uint256,uint256)
           handler: handleCampaignCreated
@@ -27,4 +27,4 @@ dataSources:
           handler: handleDonated
         - event: PromotionSubmitted(uint256,address,uint256,string,uint256,uint256,uint256)
           handler: handlePromotionSubmitted
-      file: ./src/campaigns.ts
+      file: Campaigns\Campaigns.wasm

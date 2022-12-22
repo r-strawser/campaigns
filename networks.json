@@ -1,7 +1,7 @@
 {
-    "goerli": {
-      "Campaigns": {
-        "address": "0x41063AA13d755268f27c26E23D6311C951400232"
-      }
+  "goerli": {
+    "Campaigns": {
+      "address": "0xb42B01319Fd7F190A00EDcB9A2Eb874f55103E6E"
     }
   }
+}

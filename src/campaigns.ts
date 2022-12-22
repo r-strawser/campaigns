@@ -36,13 +36,6 @@ export function handleCampaignCreated(event: CampaignCreated): void {
     entity.isActive = false
     entity.timestampCreated = event.params.timestamp
 
-    // // initialize the campaign's promotion array
-    // entity.promotions = []
-    
-    // // initialize the campaign's donor array
-    // entity.donors = []
-
-
     let contract = Campaigns.bind(event.address)
     entity.platformFeePercentage = contract.platformFeePercent()
     entity.campaignFeePercentage = contract.campaignFeePercent()
@@ -65,6 +58,7 @@ export function handleDonated(event: Donated): void {
   donor.amount = event.params.amount
   donor.timestamp = event.params.timestamp
   donor.campaign = `${event.params.campaignID}`
+  donor.campaignPointsEarned = event.params.pointsEarned
 
   // save the donor entity
   donor.save()
@@ -98,6 +92,7 @@ export function handlePromotionSubmitted(event: PromotionSubmitted): void {
   promotion.amountPaid = event.params.amountPaid
   promotion.promotionUrl = event.params.link
   promotion.timestamp = event.params.timestamp
+  promotion.campaignPointsToClaim = event.params.points;
 
   // Save the promotion entity
   promotion.save()
@@ -113,7 +108,7 @@ export function handlePromotionSubmitted(event: PromotionSubmitted): void {
 
     // update the campaign entity's totalDonated field to the specified amount from the campaignFeePercent
     campaign.totalDonated = campaign.totalDonated.plus(event.params.campaignFee)
-    
+
     // save the campaign entity
     campaign.save()
   }

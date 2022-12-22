@@ -21,6 +21,34 @@
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "_treasury",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_campaignName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_description",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_targetGoal",
+				"type": "uint256"
+			}
+		],
+		"name": "createCampaign",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "_platformTreasury",
 				"type": "address"
 			}
@@ -80,34 +108,6 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_treasury",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_campaignName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_description",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_targetGoal",
-				"type": "uint256"
-			}
-		],
-		"name": "createCampaign",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint256",
 				"name": "_campaignID",
 				"type": "uint256"
@@ -142,11 +142,54 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
+				"name": "pointsEarned",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
 				"name": "timestamp",
 				"type": "uint256"
 			}
 		],
 		"name": "Donated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "campaignID",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "promotionId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "promoter",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "points",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "PromotionClaimed",
 		"type": "event"
 	},
 	{
@@ -179,7 +222,7 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "platformFee",
+				"name": "points",
 				"type": "uint256"
 			},
 			{
@@ -202,6 +245,19 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "_promotionId",
+				"type": "uint256"
+			}
+		],
+		"name": "spendCampaignPoints",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "_campaignID",
 				"type": "uint256"
 			},
@@ -209,6 +265,11 @@
 				"internalType": "string",
 				"name": "_link",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_points",
+				"type": "uint256"
 			}
 		],
 		"name": "submitPromotion",
@@ -265,6 +326,49 @@
 	{
 		"inputs": [],
 		"name": "campaignFeePercent",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "campaignPoints",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "campaignPointsSpent",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -404,38 +508,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_campaignID",
-				"type": "uint256"
-			}
-		],
-		"name": "getCampaignOperator",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getLatestCampaignsIndex",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "MINIMUM_DONATION",
 		"outputs": [
@@ -463,7 +535,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "platformOperator",
+		"name": "platformTreasury",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -477,6 +549,62 @@
 	{
 		"inputs": [],
 		"name": "PROMOTION_PRICE",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "promotionCampaign",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "promotions",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "link",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "points",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "promotionsIndex",
 		"outputs": [
 			{
 				"internalType": "uint256",
